@@ -1,0 +1,16 @@
+{
+  "name": "tahroy/standards",
+  "description": " Standards Rector/Mago pour mes projets ",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Tahroy\\Standards\\": "src/"
+    }
+  },
+  "require-dev": {
+    "php": ">=8.2",
+    "rector/rector": "^2.1",
+    "carthage-software/mago": "^1.3"
+  }
+}

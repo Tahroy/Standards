@@ -1,0 +1,65 @@
+# Configuration Mago - Standard 2026
+# Version consolidée pour PHP 8.4
+php-version = "8.4"
+
+[source]
+paths = ["src", "tests", "config"]
+includes = ["vendor"]
+# On exclut les migrations car le code généré par Doctrine ne respecte pas toujours nos standards
+excludes = ["migrations"]
+
+[formatter]
+print-width = 120
+tab-width = 4
+use-tabs = false
+# PER-CS : Le successeur de PSR-12, gère mieux les types d'union et les énumérations
+preset = "per-cs"
+# Aligne les '=' pour plus de lisibilité sur les assignations de variables en bloc
+align-assignment-like = true
+
+[linter]
+integrations = ["symfony", "phpunit"]
+
+[linter.rules]
+# Désactivé : PHP 8.4 autorise les arguments nommés, mais forcer les littéraux rend le code trop verbeux
+literal-named-argument = { enabled = false }
+
+# Mesure de complexité : Un mix entre nombre d'opérandes et d'opérateurs distincts.
+# 7000 permet d'accepter des Property Hooks (PHP 8.4) sans exploser le score
+halstead = { effort-threshold = 7000 }
+
+# Désactivé : Rector gère déjà la sémantique des appels de fonction (ex: str_contains vs strpos)
+ambiguous-function-call = { enabled = false }
+
+# Désactivé : Autorise les arguments booléens ($flag = true) dans les méthodes, souvent utile en Symfony
+no-boolean-flag-parameter = { enabled = false }
+
+[analyzer]
+# Nettoie les constantes, méthodes ou classes privées jamais appelées
+find-unused-definitions = true
+# Détecte le code après un 'return' ou dans un 'if (false)'
+analyze-dead-code = true
+# Signale les variables passées en argument mais jamais lues (souvent un oubli de refacto)
+find-unused-parameters = true
+# Détecte les variables créées mais jamais utilisées localement
+find-unused-expressions = true
+
+# --- RIGUEUR PHP 8.4 / 2026 ---
+
+# Force #[Override] : Si la méthode parente change de nom, PHP jettera une erreur fatale. Crucial !
+check-missing-override = true
+# Empêche le code "Legacy" sans type-hints (int, string, class-name) sur les arguments et retours
+check-missing-type-hints = true
+# Vérifie que les exceptions jetées sont soit catchées, soit documentées en @throws
+check-throws = true
+# Lance des analyses probabilistes pour trouver des bugs potentiels de logique
+perform-heuristic-checks = true
+
+# --- FLEXIBILITÉ NÉCESSAIRE ---
+
+# Autorise $data['key'] même si Mago n'est pas sûr à 100% que 'key' existe (évite les faux positifs Symfony)
+allow-possibly-undefined-array-keys = true
+# Évite de forcer un typage d'index ultra-strict sur les listes (array_values, etc.)
+strict-list-index-checks = false
+# Cache les propriétés calculées pour gagner en performance d'analyse
+memoize-properties = true
