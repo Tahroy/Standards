@@ -1,7 +1,6 @@
 # --- VARIABLES PAR DÉFAUT (À surcharger dans le projet) ---
 EXEC_PHP ?= php
-CONSOLE  ?= bin/console
-SYMFONY  = $(EXEC_PHP) $(CONSOLE)
+SYMFONY  = $(EXEC_PHP) bin/console
 
 # --- COMMANDES UNIFIÉES ---
 .PHONY: help install quality fix migrate cache-clear

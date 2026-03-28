@@ -79,7 +79,6 @@ Si votre projet utilise Docker ou une structure différente, définissez les var
 
 ```makefile
 EXEC_PHP = docker compose exec php php
-CONSOLE  = bin/console
 
 include vendor/tahroy/standards/resources/Makefile-base.mk
 ```
