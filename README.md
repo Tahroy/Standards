@@ -110,9 +110,9 @@ include vendor/tahroy/standards/resources/Makefile-base.mk
 
 # On étend la commande quality
 quality:
-	$(EXEC_PHP) vendor/bin/mago lint
-	$(EXEC_PHP) vendor/bin/mago analyze
-	$(EXEC_PHP) vendor/bin/rector process --dry-run
+	@$(MAKE) mago-lint-check
+	@$(MAKE) mago-analyze-check
+	@$(MAKE) rector-check
 	$(EXEC_PHP) vendor/bin/local-php-security-checker
 ```
 
