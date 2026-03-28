@@ -4,8 +4,26 @@ Ce projet contient des configurations standardisées pour Rector, Mago et d'autr
 
 ## Installation
 
+Comme le projet n'est pas sur Packagist, vous devez ajouter le dépôt à votre `composer.json` :
+
+```json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/tahroy/standards"
+    }
+  ],
+  "require-dev": {
+    "tahroy/standards": "dev-main"
+  }
+}
+```
+
+Puis lancez :
+
 ```bash
-composer require --dev tahroy/standards
+composer update tahroy/standards
 ```
 
 ## Rector
