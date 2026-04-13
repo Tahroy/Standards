@@ -12,6 +12,8 @@ use Rector\Config\RectorConfig;
 use Rector\Configuration\RectorConfigBuilder;
 use Rector\Exception\Configuration\InvalidConfigurationException;
 use Rector\Symfony\Set\SymfonySetList;
+use Rector\TypeDeclaration\Rector\StmtsAwareInterface\DeclareStrictTypesRector;
+use Rector\TypeDeclaration\Rector\StmtsAwareInterface\SafeDeclareStrictTypesRector;
 use Tahroy\Standards\Enum\PhpVersionEnum;
 
 class RectorConfigFactory
@@ -36,6 +38,8 @@ class RectorConfigFactory
             ExplicitBoolCompareRector::class,
             SimplifyEmptyCheckOnEmptyArrayRector::class,
             InlineIfToExplicitIfRector::class,
+            DeclareStrictTypesRector::class,
+            SafeDeclareStrictTypesRector::class,
             '**/templates',
         ], $skip);
 
